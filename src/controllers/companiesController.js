@@ -132,8 +132,14 @@ const companiesByCategory = async (req, res) => {
     };
   });
 
+  const categoryName = req?.body?.categoryName;
+  const fileName = categoryName.replace(
+    /[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/g,
+    "-"
+  );
+
   const csvFromArrayOfObjects = convertArrayToCSV(companyStringArray);
-  writeFileSync("./files/it-companies.csv", csvFromArrayOfObjects);
+  writeFileSync(`./files/${fileName}.csv`, csvFromArrayOfObjects);
 };
 
 module.exports = companiesByCategory;
