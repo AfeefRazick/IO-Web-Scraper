@@ -4,6 +4,7 @@ require("dotenv").config();
 const cors = require("cors");
 const categoryRouter = require("./routes/category");
 const setupBrowser = require("./middleware/setupBrowser");
+const companiesRouter = require("./routes/companies");
 
 app.use(express.json());
 app.use(cors());
@@ -15,6 +16,7 @@ let globalBrowser;
 app.use(setupBrowser);
 
 app.use(categoryRouter);
+app.use(companiesRouter);
 
 app.listen(6200, () => {
   console.log(`Listening on port 6200`);

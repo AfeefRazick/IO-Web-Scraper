@@ -1,8 +1,8 @@
 const express = require("express");
-const getCompanies = require("../controllers/companiesController");
+const companiesByCategory = require("../controllers/companiesController");
 
 const companiesRouter = express.Router();
 
-companiesRouter.route("/companies").get(getCompanies);
+companiesRouter.route("/companies").post(companiesByCategory);
 
 module.exports = companiesRouter;

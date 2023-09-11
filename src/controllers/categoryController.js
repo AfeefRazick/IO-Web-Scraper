@@ -1,9 +1,6 @@
-const puppeteer = require("puppeteer");
 const server = require("../server");
 
 const getCategories = async (req, res) => {
-  // const browser = await puppeteer.launch({ headless: "new" });
-  // const page = await server.globalBrowser.newPage();
   let page = server.page;
   await page.goto("https://www.srilankabusiness.com/exporters-directory/");
 
@@ -13,7 +10,10 @@ const getCategories = async (req, res) => {
     const categories = menuList.map((ul) => {
       const links = Array.from(ul.querySelectorAll("li a"));
       return links.map((link) => {
-        return { category: link.innerText, link: link.getAttribute("href") };
+        return {
+          category: link.innerText,
+          link: `https://www.srilankabusiness.com${link.getAttribute("href")}`,
+        };
       });
     });
     return categories;

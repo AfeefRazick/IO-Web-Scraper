@@ -3,7 +3,7 @@ const server = require("../server");
 
 const setupBrowser = async (req, res, next) => {
   if (!server.globalBrowser) {
-    server.globalBrowser = await puppeteer.launch({ headless: "new" });
+    server.globalBrowser = await puppeteer.launch({ headless: false });
     server.page = await server.globalBrowser.newPage();
   }
   next();
