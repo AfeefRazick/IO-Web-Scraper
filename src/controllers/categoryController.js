@@ -1,7 +1,9 @@
-const server = require("../server");
+const puppeteer = require("puppeteer");
 
 const getCategories = async (req, res) => {
-  let page = server.page;
+  const browser = await puppeteer.launch({ headless: false });
+  const page = await browser.newPage();
+
   await page.goto("https://www.srilankabusiness.com/exporters-directory/");
 
   const productsServices = await page.evaluate(() => {
@@ -24,7 +26,7 @@ const getCategories = async (req, res) => {
 
   res.json({ products, services });
 
-  // await browser.close();
+  await browser.close();
 };
 
 module.exports = getCategories;
